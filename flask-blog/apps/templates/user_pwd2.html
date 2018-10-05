@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="jumbotron" style='padding: 10px 20px'>
+        <h2>{{ session.get('user_name') }}的个人中心</h2>
+    </div>
+    <div>
+        {% include 'user_menu.html' %}
+        <div class='col-md-10'>
+            <div class="jumbotron" style='margin-top: 10px'>
+                <h2>修改密码</h2>
+                <form action="{{ url_for('user_pwd') }}", method='post'>
+                    {{ form.csrf_token }}
+                    <div class='form-group'>
+                        {{ form.old_pwd.label }}
+                        {{ form.old_pwd() }}
+                        {% for error in form.old_pwd.errors %}
+                            <h4 style='color:red'>{{ error }}</h4>
+                        {% endfor %}
+                    </div>
+                    <div class='group'>
+                        {{ form.new_pwd.label }}
+                        {{ form.new_pwd }}
+                        {% for error in form.new_pwd.errors %}
+                            <h4 style='color:red'>{{ error }}</h4>
+                        {% endfor %}
+                    </div>
+                    <div class='group'>
+                        {{ form.submit }}
+                    </div>
+                    {% for message in get_flashed_messages() %}
+                        <h4 style='color:red'>{{ message }}</h4>
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

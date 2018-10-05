@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {{ form.csrf_token }}
+  <form action="{{ url_for('user_login') }}" method='post' class='col-md-6 col-md-offset-2'>
+    <div class='form-group'>
+      {{ form.user_name.label }} 
+      {{ form.user_name(size=30, value=request.args.name) }}
+      {% for error in form.user_name.errors %}
+        <h3 style='color: red'>{{ error }}</h3>
+      {% endfor %}
+    </div>
+    <div class='form-group'>
+      {{ form.user_pwd.label }}
+      {{ form.user_pwd(size=30) }}
+      {% for error in form.user_pwd.errors %}
+      <h3 style='color: red'>{{ error }}</h3>
+      {% endfor %}
+    </div>
+    <div class='form-group'>
+      {{ form.submit }}
+    </div>
+    {% for message in get_flashed_messages() %}
+      <h4 style='color: red'>{{ message }}</h4>
+    {% endfor %}
+  </form>
+{% endblock %}

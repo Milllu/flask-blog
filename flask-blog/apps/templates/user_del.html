@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="jumbotron" style='padding: 10px 20px'>
+        <h2>{{ session.get('user_name') }}的个人中心</h2>
+    </div>
+    <div>
+        {% include 'user_menu.html' %}
+        <div class='col-md-9'>
+            <div class="jumbotron">
+                <h1>注销账号</h1>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
